@@ -1,1 +1,76 @@
-Pneumonia Diagnostic Hub: Multi-Model AI DetectorAn end-to-end medical imaging web application that leverages state-of-the-art Deep Learning architectures to detect Pneumonia from Chest X-Ray images. This project demonstrates the power of Transfer Learning and Fine-Tuning using four major models: VGG19, ResNet50, MobileNetV2, and EfficientNetB0.🚀 FeaturesMulti-Model Integration: Choose between 4 different AI architectures for diagnosis.High Precision Fine-Tuning: Uses specialized "unfrozen" layers to identify subtle medical textures.Real-time Prediction: Instant classification (Normal vs. Pneumonia) with confidence percentages.Dynamic Web UI: Built with Flask and Bootstrap 5 for a clean, responsive medical interface. Project ArchitectureThe project follows a standard deep learning pipeline:Preprocessing: X-rays are resized to $128 \times 128$ and converted to 3-channel RGB.Base Models: Pre-trained weights from ImageNet provide the visual foundation.Custom Head: Flatten/Pooling layers followed by Dense layers $(4608 \rightarrow 1152 \rightarrow 2)$ for classification.Deployment: A Flask API serves the models and handles image uploads.📂 Directory Structure🛠️ Setup & Installation1. PrerequisitesEnsure you have Python 3.8+ installed.2. Install Dependencies3. Run the ApplicationVisit http://127.0.0.1:5000/ in your browser to start diagnosing!📊 Model Performance ComparisonBased on our training history, here is the performance breakdown:🧠 How it Works (Fine-Tuning Logic)Instead of training from scratch, we "unfreeze" specific deep layers (e.g., block5_conv3 in VGG19). This allows the model to adjust its existing visual filters to recognize specific medical markers like pulmonary infiltrates and pleural effusions.$$Loss = -\sum_{c=1}^M y_{o,c} \log(p_{o,c})$$We use the Categorical Cross-Entropy loss function above to minimize the error between the AI's guess ($p$) and the actual diagnosis ($y$).⚠️ DisclaimerThis tool is for educational and research purposes only. It is not intended to replace professional medical advice, diagnosis, or treatment. Always consult with a qualified healthcare provider.
+# Pneumonia Diagnostic Hub: Multi-Model AI Detector
+
+## Overview
+
+This project is an end-to-end medical imaging application designed to assist in the detection of Pneumonia from Chest X-Ray images. The system evaluates and compares four distinct Deep Learning architectures to provide highly accurate diagnostic predictions.
+
+## Features
+
+* Multi-Model Selection: Compare results from VGG19, ResNet50, MobileNetV2, and EfficientNetB0.
+* Fine-Tuned Precision: Includes specialized models with "unfrozen" layers for better detection of medical textures.
+* Live Web Interface: A Flask-based platform for image uploads and real-time analysis.
+* Confidence Scoring: Provides a probability percentage for every diagnosis.
+
+## Technical Methodology
+
+The project employs Transfer Learning by leveraging models pre-trained on the ImageNet dataset. The training pipeline consists of:
+
+1. Feature Extraction: Freezing base layers to train a custom classification head.
+2. Fine-Tuning: Unfreezing the final convolutional blocks to adapt to specific radiographic features.
+3. Preprocessing: Converting images to grayscale, resizing to 128x128, and normalizing pixel values to a 0-1 range.
+
+## Directory Structure
+
+```text
+project-root/
+├── app.py                   # Main Flask application
+├── static/
+│   └── uploads/             # Directory for user-uploaded images
+├── templates/
+│   └── index.html           # Web interface template
+├── model_weights/           # Directory for model storage
+├── requirements.txt         # Project dependencies
+└── README.md                # Project documentation
+
+```
+
+## Installation and Setup
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Shahab-khan396/Pneumonia-Diagnostic-Multi-Model-AI-Detector.git
+cd Pneumonia-Diagnostic-Multi-Model-AI-Detector
+
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+
+```
+
+### 3. Run the Application
+
+```bash
+python app.py
+
+```
+
+Access the application at `http://127.0.0.1:5000/`.
+
+## Model Downloads
+
+Due to GitHub's file size limitations, pre-trained model files are hosted externally. Download the required files and place them in the root directory:
+
+| Model Filename | Architecture | Recommended For | Download Link |
+| --- | --- | --- | --- |
+| VGG19_model.h5 | VGG19 | High-detail analysis | [Link](https://drive.google.com/file/d/1StoeboiUFOCr903wNBwS6yl5dBBruCav/view?usp=drive_link) |
+| resnet50_model.h5 | ResNet50 | Complex feature patterns | [Link](https://drive.google.com/file/d/1rE9Bj4h81CNxFfAuywLNxLSocl29tVCu/view?usp=drive_link) |
+| mobilenet_model.h5 | MobileNetV2 | High-speed inference | [Link](https://drive.google.com/file/d/1fSpyvv54v3dFbQ3buHW5HlSr61fXBCh8/view?usp=drive_link) |
+| efficientnet_model.h5 | EfficientNetB0 | Balanced performance | [Link](https://drive.google.com/file/d/1f8G8AduJYqA0AO4tCyrClWD1yWcYODrk/view?usp=drive_link) |
+
+## Disclaimer
+
+This application is for educational and research purposes only. It is not intended to be a substitute for professional medical advice, diagnosis, or treatment.
